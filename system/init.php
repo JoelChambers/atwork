@@ -13,6 +13,6 @@
   $_SESSION['user'] = 'filipp';
 
   $basedir = realpath(__FILE__ . '/../../');
-  $db = new PDO("sqlite:{$basedir}/system/ma.db");
+  $db = new PDO("sqlite:{$basedir}/system/atwork.db");
 
 ?>

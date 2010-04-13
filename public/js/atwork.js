@@ -1,6 +1,5 @@
-/**
- * atwork/js/atwork.js
- */
+////
+// atwork/js/atwork.js
 
 function lpad(str, pad, len)
 {
@@ -37,9 +36,9 @@ $(function()
   
   $('#dialog').dialog({
     autoOpen: false,
-    height:340,
-    width:400,
-    modal:true,
+    height:380,
+    width:395,
+    modal:false,
     draggable:false,
     resizable:false,
     buttons: {
@@ -48,6 +47,8 @@ $(function()
       },
       'Oletus': function() {
         // Sets default hours
+        $('#type').val('1');
+        $('#lunch').attr('checked', 'checked');
         $('.start_h:first').val('10');
         $('.start_m:first').val('00');
         $('.finish_h:first').val('18');

@@ -1,4 +1,5 @@
 /**
+ * atwork/css/screen.css
  * 
  */
 body {
@@ -21,7 +22,6 @@ body {
 .day {
   width:110px;
   height:110px;
-  background-color:#cacaca;
   float:left;
   margin:2px;
   padding:5px;
@@ -30,6 +30,7 @@ body {
   -webkit-border-radius:5px;
   color:#000;
   font-weight:bold;
+  background-color:#cdcdcd;
 }
 .day:hover {
   cursor:pointer;
@@ -72,7 +73,7 @@ h2 {
   color:#999;
 }
 textarea {
-  width:360px;
+  width:358px;
   resize:none;
   padding:3px;
   height:80px;

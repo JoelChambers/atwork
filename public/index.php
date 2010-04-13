@@ -2,12 +2,15 @@
   
   ////
   // atwork/index.php
+  
   require_once '../system/init.php';
   
   if (!empty($_POST['date']))
   {
     $format = '%d-%02d-%02d %02d:%02d';
     $date = explode('.', $_POST['date']);
+    // First we check if we insert or update
+    
     $sql = 'INSERT INTO atwork (user, start, finish) VALUES (?, ?, ?)';
     $stmt = $db->prepare($sql);
     
