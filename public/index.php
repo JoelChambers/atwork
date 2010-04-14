@@ -9,9 +9,11 @@
   {
     $format = '%d-%02d-%02d %02d:%02d';
     $date = explode('.', $_POST['date']);
-    // First we check if we insert or update
     
-    $sql = 'INSERT INTO atwork (user, start, finish) VALUES (?, ?, ?)';
+    // First we check if we insert or update
+    $sql = 'SELECT id FROM atwork WHERE ';
+    $sql = 'INSERT INTO atwork (user, start, finish, type, notes)
+    VALUES (?, ?, ?, ?, ?)';
     $stmt = $db->prepare($sql);
     
     foreach($_POST['start-h'] as $k => $h_start)
@@ -44,7 +46,7 @@
     @import url('css/screen.css');
   </style>
 	
-	<title>@work</title>
+	<title>atwork v0.1</title>
 	
 </head>
 

@@ -32,7 +32,7 @@
   $first = mktime(0, 0, 0, $_SESSION['m'], 0);
   $last = mktime(0, 0, 0, $_SESSION['m']+1, 0);
   $days = ($last-$first)/3600/24;
-
+  
 ?>
 
   <img src="images/cal_16.png" class="icon" alt=""/>
@@ -40,17 +40,20 @@
 
 <?php
   
-    foreach(range(1, $days) as $d):
-      
-      $current = $first+3600*24*$d;
-      $txt = date('D, d', $current);
-      $stmt->execute(array($_SESSION['user'], date('Y-m-d', $current)));
-      $tmp = current($stmt->fetchAll());
-      $work = $tmp['done']/3600;
+  foreach(range(1, $days) as $d):
+    
+    $current = $first+3600*24*$d;
+    $txt = date('D, d', $current);
+    $stmt->execute(array($_SESSION['user'], date('Y-m-d', $current)));
+    $tmp = current($stmt->fetchAll());
+    $work = $tmp['done']/3600;
       
 ?>
   
-  <div class="day" title="<?= date('d.m.Y', $current); ?>">
+  <div
+    class="day"
+    id="<?= date('Y-m-d', $current); ?>"
+    title="<?= date('d.m.Y', $current); ?>">
     <?= $txt; ?>
     <div class="hours"><?= $work; ?>h</div>
   </div>

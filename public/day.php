@@ -5,17 +5,16 @@
   
   require_once '../system/init.php';
   
-  $tmp = explode('.', $_POST['d']);
-  $date = sprintf('%d-%02d-%02d', $tmp[2], $tmp[1], $tmp[0]);
+  $date = $_POST['d'];
   
   // Find this day
   $sql = "SELECT * FROM atwork WHERE user = ?
-  AND date(?) BETWEEN date(start) AND date(finish);";
+  AND date(?) BETWEEN date(start) AND date(finish)";
   $stmt = $db->prepare($sql);
   $stmt->execute(array($_SESSION['user'], $date));
-  $day = $stmt->fetchAll();
+  $day = $stmt->fetchAll(PDO::FETCH_ASSOC);
   $day = array_pad($day, 5, array());
-
+  
 ?>
 
 <form action="#" method="post" id="timeform">
@@ -33,6 +32,7 @@
 
   foreach(range(0, 4) as $r):
     
+    // These are typically empty
     $start = @date_parse($day[$r]['start']);
     $finish = @date_parse($day[$r]['finish']);
 
@@ -41,7 +41,7 @@
       <tr>
         <td>
           <select name="start-h[<?= $r; ?>]" class="start_h">
-            <option>--</option>
+            <option value="0000-00-00 00:00">--</option>
           
 <?php
 
@@ -58,7 +58,7 @@
         </select>
         :
         <select name="start-m[<?= $r; ?>]" class="start_m">
-          <option>--</option>
+          <option value="0000-00-00 00:00">--</option>
           
 <?php
 
@@ -77,7 +77,7 @@
       </td>
       <td>
         <select name="finish-h[<?= $r; ?>]" class="finish_h">
-          <option>--</option>
+          <option value="0000-00-00 00:00">--</option>
           
 <?php
   
@@ -94,7 +94,7 @@
         </select>
         :
         <select name="finish-m[<?= $r; ?>]" class="finish_m">
-          <option>--</option>
+          <option value="0000-00-00 00:00">--</option>
           
 <?php
 
@@ -117,14 +117,18 @@
     <tr>
       <td colspan="2">
         <select style="width:368px" name="type" id="type">
-          <option>--</option>
-          <option value="1">Töissä</option>
-          <option value="2">Etätöissä</option>
-          <option value="3">Sairaana</option>
-          <option value="4">Ylityövapaalla</option>
-          <option value="5">Koulutuksessa</option>
-          <option value="6">Vuosilomalla</option>
-          <option value="7">Isyys/äitiyslomalla</option>
+          
+<?php
+  
+  foreach ($day_types as $k => $v):
+  
+    $selected = ($k == $day[0]['type']) ? 'selected="selected"' : '';
+  
+?>
+          <option value="<?= $k; ?>" <?= $selected; ?>><?= $v; ?></option>
+        
+<?php endforeach ?>
+          
         </select>
       </td>
     </tr>

@@ -10,11 +10,11 @@ function lpad(str, pad, len)
   return str;
 }
 
-function load_day(day)
+function load_day(day, str)
 {
   $('#dialog').load('day.php', {d: day},
     function() {
-      $('#dialog').dialog('option', 'title', day);
+      $('#dialog').dialog('option', 'title', str);
       $('#dialog').dialog('open');
     });
 }
@@ -25,7 +25,7 @@ function load_month(month)
   $('#month').load('month.php', {m: month},
     function() {
       $('.day').click(function() {
-        load_day($(this).attr('title'));
+        load_day($(this).attr('id'), $(this).attr('title'));
       });
     });
 }
@@ -35,7 +35,7 @@ $(function()
   load_month(0);
   
   $('#dialog').dialog({
-    autoOpen: false,
+    autoOpen:false,
     height:380,
     width:395,
     modal:false,
@@ -47,7 +47,7 @@ $(function()
       },
       'Oletus': function() {
         // Sets default hours
-        $('#type').val('1');
+        $('#type').val('0');
         $('#lunch').attr('checked', 'checked');
         $('.start_h:first').val('10');
         $('.start_m:first').val('00');

@@ -14,5 +14,16 @@
 
   $basedir = realpath(__FILE__ . '/../../');
   $db = new PDO("sqlite:{$basedir}/system/atwork.db");
+  
+  $day_types = array(
+    '--',
+    'Töissä',
+    'Etätöissä',
+    'Sairaana',
+    'Ylityövapaalla',
+    'Koulutuksessa',
+    'Vuosilomalla',
+    'Isyys/äitiyslomalla'
+  );
 
 ?>
